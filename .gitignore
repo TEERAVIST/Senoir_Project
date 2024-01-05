@@ -1,0 +1,13 @@
+__pycache__
+.venv
+app.py
+app1.py
+logistic_regression_model.sav
+model_first.pkl
+*.png
+youtube1.py
+templates
+sample.json
+predict_scipt.sh
+model_first.pkl
+random_forest_model.pkl
