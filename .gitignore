@@ -3,5 +3,5 @@ __pycache__
 model_first.pkl
 *.png
 youtube1.py
-sample.json
+simple.json
 predict_scipt.sh
