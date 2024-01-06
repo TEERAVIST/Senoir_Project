@@ -4,7 +4,7 @@ import pandas as pd
 
 app = Flask(__name__)
 
-with open('../knn_model.pkl', 'rb') as f:
+with open('../models/knn_model.pkl', 'rb') as f:
     model = pickle.load(f)
 
 @app.route('/', methods=['GET', 'POST'])
