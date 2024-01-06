@@ -53,7 +53,7 @@ class ScoringItem(BaseModel):
       # attack: float#"neptune",
       # level: float#21
 
-with open('logistic_regression_model.pkl','rb') as f:
+with open('../models/logistic_regression_model.pkl','rb') as f:
    model = pickle.load(f)
 
 # with open('random_forest_model1.pkl', 'rb') as f:
