@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+import _pickle as cPickle
+import joblib
 from pydantic import BaseModel
 import pickle
 import pandas as pd
@@ -51,8 +53,15 @@ class ScoringItem(BaseModel):
       # attack: float#"neptune",
       # level: float#21
 
-with open('knn_model.pkl','rb') as f:
-    model = pickle.load(f)
+with open('logistic_regression_model.pkl','rb') as f:
+   model = pickle.load(f)
+
+# with open('random_forest_model1.pkl', 'rb') as f:
+#    model = joblib.load(f)
+
+#with open('random_forest_model1.pkl', 'rb') as f:
+#    model = cPickle.load(f)
+
 
 
 @app.post('/')
