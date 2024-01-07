@@ -1,5 +1,6 @@
 __pycache__
 .venv
+node_modules
 model_first.pkl
 *.png
 youtube1.py

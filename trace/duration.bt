@@ -1,0 +1,19 @@
+#!/usr/sbin/bpftrace
+
+tracepoint:syscalls:sys_enter_execve
+{
+    @start[tid] = nsecs;
+}
+
+tracepoint:syscalls:sys_exit_execve
+/ @start[tid] /
+{
+    @duration[tid] = hist(nsecs - @start[tid]);
+    delete(@start[tid]);
+}
+
+END
+{
+    print(@duration);
+}
+

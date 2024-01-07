@@ -1,0 +1,1 @@
+sudo tshark -r packet-captures/amp.dns.RRSIG.fragmented.pcap -T json -e frame.time -e ip.proto -e ip.src -e ip.dst -e frame.len -e udp.srcport -e udp.dstport -e tcp.dstport -e tcp.srcport -e tcp.time_delta -e dns.qry.name
