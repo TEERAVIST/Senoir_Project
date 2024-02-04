@@ -73,8 +73,6 @@ const TerminalApp = () => {
     commandWithArguments = `traceroute ${argumentsValue}`;
   }
 
-  console.log('Command with arguments:', commandWithArguments); // Add this line for debugging
-
 
     axios.get(`http://localhost:5000/get_data?command=${encodeURIComponent(commandWithArguments)}`)
       .then(response => setOutput(response.data))
@@ -188,6 +186,26 @@ const TerminalApp = () => {
     {popupOutput === 'U2R' && (
       <p style={{ color: '#b2102f' , fontWeight: 'bold' }}>
         This is a U2R and is considered dangerous, it can be buffer_overflow, loadmodule, perl, ps, rootkit, sqlattack, xterm. Please take immediate action.
+      </p>
+    )}
+    {popupOutput === 'Probe' && (
+      <p style={{ color: '#b2102f' , fontWeight: 'bold' }}>
+        This is a Probe and is considered dangerous, it can be ipsweep, mscan, nmap, portsweep, saint, satan. Please take immediate action.
+      </p>
+    )}
+    {popupOutput === 'R2L' && (
+      <p style={{ color: '#b2102f' , fontWeight: 'bold' }}>
+        This is a R2L and is considered dangerous, it can be ftp_write, guess_passwd, httptunnel, imap, multihop, named, phf,sendmail, snmpgetattack, snmpguess, spy, warezclient, warezmaster, xlock, xsnoop. Please take immediate action.
+      </p>
+    )}
+    {popupOutput === 'Dos' && (
+      <p style={{ color: '#b2102f' , fontWeight: 'bold' }}>
+        This is a Dos and is considered dangerous, it can be apache2, back, land, neptune, mailbomb, pod, processtable, smurf, teardrop, udpstorm, worm. Please take immediate action.
+      </p>
+    )}
+    {popupOutput === 'Normal' && (
+      <p style={{ color: 'green' , fontWeight: 'bold' }}>
+        This is a normal, you can feel safe from exloitation on your network.
       </p>
     )}
     <button onClick={() => setModalIsOpen(false)}>Close</button>
