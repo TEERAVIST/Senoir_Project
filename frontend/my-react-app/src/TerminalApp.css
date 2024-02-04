@@ -83,11 +83,6 @@
 
 
 /* Style for the overlay (the background behind the modal) */
-body.modal-open {
-  overflow: hidden; /* Prevent scrolling on the background content */
-}
-
-/* Style for the overlay (the background behind the modal) */
 .ReactModal__Overlay {
   position: fixed;
   top: 0;
@@ -97,10 +92,13 @@ body.modal-open {
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(5px); /* Add backdrop-filter for blur effect */
+  background: white; /* Background image */
+  background-size: cover; /* Cover the entire overlay */
   z-index: 1000; /* Ensure the overlay is on top of other elements */
-
+  
+ 
 }
+
 /* Style for the modal content */
 .ReactModal__Content {
   position: relative;

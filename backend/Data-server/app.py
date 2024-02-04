@@ -57,6 +57,7 @@ def execute_command(command):
         return "Error: Command timed out."
 
 
+
 def execute_sudo_netstat(command):
     # Handle the sudo netstat -anp command
     password = get_password()  # Use a default password for demonstration purposes (replace with more secure approach)
@@ -92,6 +93,15 @@ def get_data():
     command = request.args.get('command', '/proc/cpuinfo')
     result = execute_command(command)
     return result
+    
+def execute_whois(command):
+    try:
+        result = subprocess.check_output(command, shell=True, text=True)
+        return result
+    except subprocess.CalledProcessError as e:
+        return f"Error running whois: {e}"
+    except subprocess.TimeoutExpired:
+        return "Error: Command timed out."
 
 if __name__ == '__main__':
     app.run(debug=True)

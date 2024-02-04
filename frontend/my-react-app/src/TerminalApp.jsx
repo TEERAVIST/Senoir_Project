@@ -64,7 +64,17 @@ const TerminalApp = () => {
     setLoading(true);
     setOutput('');
 
-    const commandWithArguments = argumentsValue ? `${selectedCommand} ${argumentsValue}` : selectedCommand;
+   // Define the command with arguments
+  let commandWithArguments = selectedCommand;
+
+  if (selectedCommand === 'whois') {
+    commandWithArguments = `whois ${argumentsValue}`;
+  } else if (selectedCommand === 'traceroute') {
+    commandWithArguments = `traceroute ${argumentsValue}`;
+  }
+
+  console.log('Command with arguments:', commandWithArguments); // Add this line for debugging
+
 
     axios.get(`http://localhost:5000/get_data?command=${encodeURIComponent(commandWithArguments)}`)
       .then(response => setOutput(response.data))
@@ -104,12 +114,12 @@ const TerminalApp = () => {
       <div>
       <label htmlFor="commands">Select Command:</label>
       <select id="commands" onChange={handleCommandChange} value={selectedCommand}>
-        <option value="/proc/cpuinfo">infomation CPU</option> {/* Update the default command here */}
-        <option value="uname -a">uname -a</option>
-        <option value="lsof -i">lsof -i</option>
-        <option value="sudo netstat -anp">netstat (old)</option>
-        <option value="sudo ss -tanup">ss (new)</option>
-        <option value="traceroute">traceroute</option>
+        <option value="/proc/cpuinfo">Infomation CPU</option> {/* Update the default command here */}
+        <option value="uname -a">System Information</option>
+        <option value="lsof -i">Open Network Connections</option>
+        <option value="whois">Whois </option>
+        <option value="sudo ss -tanup">Investigate Sockets</option>
+        <option value="traceroute">Traceroute</option>
         {/* Add more options as needed */}
       </select>
       </div>
@@ -123,7 +133,19 @@ const TerminalApp = () => {
           {/* Add more options as needed */}
         </select>
       </div>
-     
+
+      {selectedCommand === 'whois' && (
+        <div>
+          <label htmlFor="arguments">Arguments:</label>
+          <input
+            type="text"
+            id="arguments"
+            placeholder="Enter arguments for whois"
+            value={argumentsValue}
+            onChange={handleArgumentsChange}
+          />
+        </div>
+      )}
       
       {selectedCommand === 'traceroute' && (
         <div>
