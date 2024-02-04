@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Data Retrieval</title>
+    <style>
+        #loading {
+            display: none;
+        }
+
+        #arguments-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Terminal Data Retrieval</h1>
+    <label for="commands">Select Command:</label>
+    <select id="commands" onchange="toggleArguments()">
+        <option value="/proc/filesystems">cat /proc/filesystems</option>
+        <option value="uname -a">uname -a</option>
+        <option value="lsof -i">lsof -i</option>
+        <option value="traceroute">traceroute</option>
+        <!-- Add more options as needed -->
+    </select>
+
+    <div id="arguments-container">
+        <label for="arguments">Arguments:</label>
+        <input type="text" id="arguments" placeholder="Enter arguments for the command">
+    </div>
+
+    <button onclick="getData()">Get Data</button>
+    <div id="loading">Loading...</div>
+    <pre id="output"></pre>
+
+    <script>
+        function toggleArguments() {
+            const commandsSelect = document.getElementById('commands');
+            const argumentsContainer = document.getElementById('arguments-container');
+
+            argumentsContainer.style.display = commandsSelect.value === 'traceroute' ? 'block' : 'none';
+        }
+
+        function getData() {
+            const selectedCommand = document.getElementById('commands').value;
+            const argumentsValue = document.getElementById('arguments').value;
+            const loading = document.getElementById('loading');
+            const output = document.getElementById('output');
+
+            loading.style.display = 'block';
+            output.innerText = '';  // Clear previous output
+
+            const commandWithArguments = argumentsValue
+                ? `${selectedCommand} ${argumentsValue}`
+                : selectedCommand;
+
+            fetch(`/get_data?command=${encodeURIComponent(commandWithArguments)}`)
+                .then(response => response.text())
+                .then(data => {
+                    output.innerText = data;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    output.innerText = 'Error occurred while fetching data.';
+                })
+                .finally(() => {
+                    loading.style.display = 'none';
+                });
+        }
+    </script>
+</body>
+</html>
+

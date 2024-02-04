@@ -1,0 +1,45 @@
+const { exec } = require('child_process');
+const fs = require('fs');
+
+// Path to the kdd99extractor.elf file
+const kdd99extractorPath = './kdd99extractor';
+
+// Run the kdd99extractor.elf file and collect the output
+exec(`${kdd99extractorPath} | head -n 1`, (error, stdout, stderr) => {
+  if (error) {
+    console.error(`Error running kdd99extractor.elf: ${error.message}`);
+    return;
+  }
+
+  if (stderr) {
+    console.error(`Error in kdd99extractor.elf: ${stderr}`);
+    return;
+  }
+
+  // Parse the output and create JSON data
+  const output = stdout.trim(); // Remove trailing newline
+  const features = [
+    "duration", "protocol_type", "service", "flag", "src_bytes",
+    "dst_bytes", "land", "wrong_fragment", "urgent", "hot",
+    "num_failed_logins", "logged_in", "num_compromised", "root_shell", "su_attempted",
+    "num_root", "num_file_creations", "num_shells", "num_access_files", "num_outbound_cmds",
+    "is_host_login", "is_guest_login", "count", "srv_count", "serror_rate", "srv_serror_rate",
+    "rerror_rate", "srv_rerror_rate", "same_srv_rate", "diff_srv_rate", "srv_diff_host_rate",
+    "dst_host_count", "dst_host_srv_count", "dst_host_same_srv_rate", "dst_host_diff_srv_rate",
+    "dst_host_same_src_port_rate", "dst_host_srv_diff_host_rate", "dst_host_serror_rate",
+    "dst_host_srv_serror_rate", "dst_host_rerror_rate", "dst_host_srv_rerror_rate"
+  ];
+  const outputValues = output.split(",");
+  const jsonData = {};
+  features.forEach((feature, index) => {
+    jsonData[feature] = parseFloat(outputValues[index]) || outputValues[index];
+  });
+
+  // Write JSON data to a file
+  const path = require('path');
+  const outputPath = path.join(__dirname, 'input_data.json');
+  fs.writeFileSync(outputPath, JSON.stringify(jsonData, null, 2));
+
+  console.log(`Data collected and stored in ${outputPath}`);
+});
+

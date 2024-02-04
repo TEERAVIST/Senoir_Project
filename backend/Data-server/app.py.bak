@@ -1,0 +1,41 @@
+from flask import Flask, render_template, request
+import subprocess
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/get_data')
+def get_data():
+    command = request.args.get('command', '/proc/filesystems')
+    try:
+        if command == '/proc/filesystems':
+            with open(command, 'r') as file:
+                result = file.read()
+
+        elif command.startswith('timeout'):
+            result = subprocess.check_output(command, shell=True, text=True, timeout=5)  # Set timeout as needed
+        elif command.startswith('sudo'):
+            # Use a default password for demonstration purposes (replace with more secure approach)
+            password = '123'
+            if command.startswith('sudo netstat -anp'):
+                # Handle the sudo netstat -anp command
+                result = subprocess.check_output(f'echo {password} | sudo -S netstat -anp', shell=True, text=True)
+            else:
+                # Use expect to handle password input for other sudo commands
+                result = subprocess.check_output(f'echo {password} | sudo -S {command[5:]}', shell=True, text=True)
+        else:
+            result = subprocess.check_output(command, shell=True, text=True)
+        return result
+    except subprocess.CalledProcessError as e:
+        return f"Error: {e}"
+    except subprocess.TimeoutExpired:
+        return "Error: Command timed out."
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
