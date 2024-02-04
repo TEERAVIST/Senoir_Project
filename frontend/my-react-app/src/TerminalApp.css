@@ -1,0 +1,132 @@
+
+
+.output-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   color: rgb(9, 9, 9);
+    margin-top: 20px;
+    width: 100%;
+
+  }
+  
+
+  .topic{
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+    color: rgb(12, 12, 12);
+    text-shadow: 1px 1px 2px white;
+    font-size: 40px;
+
+  }
+
+  .select-container {
+    display: grid;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  button{
+    background:  rgb(126, 102, 183);
+    border-radius: .5rem;
+    font-size: 14px;
+    padding: 3px 3px 3px 3px;
+    cursor: pointer;
+    &:hover{
+        background:  rgb(160, 138, 212);
+        color: white;
+    }
+  }
+  
+  select{
+    background: transparent;
+    border-radius: .5rem;
+    border: 2px solid rgb(107, 79, 158);
+    font-size: 14px;
+    padding:1.5px 0 1.5px 0;
+    cursor: pointer;
+  }
+/* 
+.ReactModal__Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+.ReactModal__Content {
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  background-color: #fff; 
+  padding: 20px;
+  max-width: 500px; 
+  width: 100%;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: cen;
+}
+} */
+/* In your CSS file or styles section */
+
+.ReactModalPortal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-200px);
+
+
+/* Style for the overlay (the background behind the modal) */
+body.modal-open {
+  overflow: hidden; /* Prevent scrolling on the background content */
+}
+
+/* Style for the overlay (the background behind the modal) */
+.ReactModal__Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px); /* Add backdrop-filter for blur effect */
+  z-index: 1000; /* Ensure the overlay is on top of other elements */
+
+}
+/* Style for the modal content */
+.ReactModal__Content {
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow around the modal */
+  background-color: #fff; /* White background */
+  padding: 20px;
+  max-width: 500px; /* Adjust as needed */
+  width: 100%;
+  border-radius: 5px;
+text-align: center;
+  /* Additional styles for content if needed */
+}
+
+/* Add background to the modal content */
+.ReactModal__Content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('background.png') center center / cover; /* Replace with your image */
+  opacity: 1; /* Adjust the opacity as needed */
+  z-index: -1;
+  border-radius: 5px;
+  
+}
+
+}
