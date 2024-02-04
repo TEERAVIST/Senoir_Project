@@ -1,6 +1,8 @@
 __pycache__
 .venv
 node_modules
+trace/packet-captures
+my-vite-react-flask-app
 model_first.pkl
 *.png
 youtube1.py
