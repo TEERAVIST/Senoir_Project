@@ -3,7 +3,7 @@
   "protocol_type": 1,
   "service": 44,
   "flag": 0,
-  "src_bytes": 68,
+  "src_bytes": 87,
   "dst_bytes": "0",
   "land": "0",
   "wrong_fragment": "0",
