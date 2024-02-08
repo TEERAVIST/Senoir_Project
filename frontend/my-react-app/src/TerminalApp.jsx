@@ -205,7 +205,7 @@ const TerminalApp = () => {
     )}
     {popupOutput === 'Normal' && (
       <p style={{ color: 'green' , fontWeight: 'bold' }}>
-        This is a normal, you can feel safe from exloitation on your network.
+        This is a normal, you can feel safe from exploitation on your network.
       </p>
     )}
     <button onClick={() => setModalIsOpen(false)}>Close</button>
