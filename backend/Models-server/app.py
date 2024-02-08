@@ -92,11 +92,11 @@ for model_file in models.keys():
 
 # Assuming you have a mapping dictionary like this:
 class_mapping = {
-    0: 'Normal',
-    1: 'Dos',
+    4: 'Normal',
+    0: 'Dos',
     2: 'R2L',
-    3: 'Probe',
-    4: 'U2R',
+    1: 'Probe',
+    3: 'U2R',
     # ... add more mappings as needed
 }
 
