@@ -7,5 +7,3 @@ source .venv\script\activate
 ```
 
 
-come on
-
